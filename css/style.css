@@ -365,7 +365,13 @@ body {
     transition: all var(--transition-normal);
     border: 2px solid transparent;
     min-width: 180px;
+    min-height: 44px; /* Minimum touch target size for mobile */
     justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary {
@@ -1407,11 +1413,18 @@ section {
 }
 
 /* ===== CONTACT SECTION ===== */
+.contact-section {
+    position: relative;
+    z-index: 1;
+}
+
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-16);
     align-items: start;
+    position: relative;
+    z-index: 1;
 }
 
 /* Contact Form Styles */
@@ -1420,6 +1433,9 @@ section {
     padding: var(--spacing-8);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+    touch-action: manipulation;
 }
 
 .contact-form-header {
@@ -1443,6 +1459,9 @@ section {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-6);
+    position: relative;
+    z-index: 1;
+    touch-action: manipulation;
 }
 
 .form-group {
@@ -1466,6 +1485,9 @@ section {
     font-family: var(--font-family);
     transition: var(--transition-fast);
     background: var(--white);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
+    min-height: 44px; /* Minimum touch target size */
 }
 
 .form-group input:focus,
@@ -1500,7 +1522,12 @@ section {
     align-self: flex-start;
     position: relative;
     min-width: 160px;
+    min-height: 44px; /* Minimum touch target size */
     justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+    z-index: 10;
+    cursor: pointer;
 }
 
 .submit-btn:disabled {
@@ -1537,6 +1564,9 @@ section {
     box-shadow: var(--shadow-md);
     text-align: center;
     transition: var(--transition-normal);
+    position: relative;
+    z-index: 1;
+    touch-action: manipulation;
 }
 
 .contact-card:hover {
@@ -1574,6 +1604,13 @@ section {
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition-fast);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.2);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-link:hover {
@@ -1586,6 +1623,9 @@ section {
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     text-align: center;
+    position: relative;
+    z-index: 1;
+    touch-action: manipulation;
 }
 
 .contact-cta h3 {
@@ -1610,6 +1650,65 @@ section {
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+    }
+    
+    /* Mobile touch fixes for contact section */
+    .contact-section {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .contact-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .contact-form-container,
+    .contact-card,
+    .contact-cta {
+        position: relative;
+        z-index: 2;
+        touch-action: manipulation;
+    }
+    
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form button {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+        pointer-events: auto;
+    }
+    
+    .btn,
+    .contact-link,
+    .submit-btn {
+        min-height: 48px; /* Larger touch target for mobile */
+        min-width: 200px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+        pointer-events: auto;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+    }
+    
+    /* Ensure buttons are clickable */
+    a.btn,
+    button.btn {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    /* Fix for download CV button */
+    a[download],
+    .btn[download] {
+        pointer-events: auto;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+        z-index: 10;
+        position: relative;
     }
 }
 
@@ -1636,8 +1735,8 @@ section {
 }
 
 .social-link {
-    width: 40px;
-    height: 40px;
+    width: 44px; /* Minimum touch target size */
+    height: 44px; /* Minimum touch target size */
     background: var(--gray-800);
     border-radius: 50%;
     display: flex;
@@ -1646,6 +1745,11 @@ section {
     color: var(--gray-400);
     text-decoration: none;
     transition: var(--transition-fast);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3);
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
 }
 
 .social-link:hover {
@@ -1676,10 +1780,15 @@ section {
     .contact-content {
         grid-template-columns: 1fr;
         gap: var(--spacing-12);
+        position: relative;
+        z-index: 1;
     }
     
     .contact-form-container {
         order: 1;
+        position: relative;
+        z-index: 2;
+        touch-action: manipulation;
     }
     
     .contact-info {
@@ -1687,6 +1796,22 @@ section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: var(--spacing-6);
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Ensure all interactive elements are touchable */
+    .contact-section * {
+        pointer-events: auto;
+    }
+    
+    .contact-section .btn,
+    .contact-section .contact-link,
+    .contact-section input,
+    .contact-section textarea,
+    .contact-section button {
+        pointer-events: auto;
+        touch-action: manipulation;
     }
     
     .hero-title {
