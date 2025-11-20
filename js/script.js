@@ -334,7 +334,7 @@ function initContactForm() {
             // Show appropriate success message based on method used
             if (result.method === 'mailto') {
                 showNotification('Email app opened! Your message is ready to send. Please tap send in your email app.', 'success');
-            } else if (result.method === 'deno-resend') {
+            } else if (result.method === 'web3forms') {
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
             } else {
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
@@ -456,85 +456,65 @@ function clearFieldError(field) {
     }
 }
 
-// ===== EMAIL SENDING WITH DENO + RESEND ===== //
+// ===== EMAIL SENDING WITH WEB3FORMS (Works Immediately - No Deployment Needed) ===== //
 async function sendEmail(emailData) {
     console.log('🚀 Starting email send process...');
     console.log('📧 Email data:', emailData);
     
-    // Check if we're on localhost (development) or production
-    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    // Web3Forms - Works immediately on all devices, no deployment needed
+    // Get your access key from: https://web3forms.com
+    // Just enter your email: omarabdullatiff000@gmail.com and get the access key (free, unlimited emails)
+    // TODO: Replace this with your actual Web3Forms access key
+    const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY_HERE'; // Get from https://web3forms.com
     
-    // Deno Deploy function URL - UPDATE THIS with your deployed function URL
-    // 
-    // TO DEPLOY:
-    // 1. Go to https://deno.com/deploy
-    // 2. Sign up and create new project
-    // 3. Deploy functions/send-contact-email.ts
-    // 4. Set RESEND_API_KEY environment variable
-    // 5. Copy your function URL and replace the URL below
-    //
-    // Example: If your Deno Deploy URL is https://portfolio-email-abc123.deno.dev
-    // Then use: 'https://portfolio-email-abc123.deno.dev/send-contact-email'
-    //
-    const DENO_FUNCTION_URL = isLocalhost 
-        ? 'http://localhost:8000/send-contact-email' // Local development
-        : null; // Production - Set this after deploying to Deno Deploy!
-    
-    // If no production URL is set, show helpful error
-    if (!DENO_FUNCTION_URL && !isLocalhost) {
-        console.error('❌ Deno function URL not configured for production!');
-        console.error('📖 See DEPLOY_DENO_FUNCTION.md for deployment instructions');
-        throw new Error('Email service not configured. Please deploy the Deno function or contact the site owner.');
+    // Check if access key is configured
+    if (WEB3FORMS_ACCESS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY_HERE') {
+        console.warn('⚠️ Web3Forms access key not configured. Using mailto fallback.');
+        console.warn('📖 Get your free access key at: https://web3forms.com');
+        return await sendEmailAlternative(emailData);
     }
     
-    // Try to send via Deno function (works on all devices)
     try {
-        console.log('📤 Sending email via Deno + Resend function...');
+        console.log('📤 Sending email via Web3Forms (automatic, works on mobile)...');
         
-        const payload = {
-            name: emailData.name,
-            email: emailData.email,
-            message: `Subject: ${emailData.subject}\n\n${emailData.message}`
-        };
+        const formData = new FormData();
+        formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+        formData.append('name', emailData.name);
+        formData.append('email', emailData.email);
+        formData.append('subject', `Portfolio Contact: ${emailData.subject}`);
+        formData.append('message', emailData.message);
+        formData.append('from_name', emailData.name);
         
-        console.log('📋 Sending payload to Deno function:', payload);
-        console.log('🌐 Function URL:', DENO_FUNCTION_URL);
-        
-        const response = await fetch(DENO_FUNCTION_URL, {
+        const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
+            body: formData
         });
         
         console.log('📡 Response status:', response.status);
         
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error('❌ Deno function error response:', errorText);
             throw new Error(`Email service error: ${response.status}`);
         }
         
         const result = await response.json();
-        console.log('📨 Deno function response:', result);
+        console.log('📨 Web3Forms response:', result);
         
         if (result.success) {
-            console.log('✅ Email sent successfully via Deno + Resend');
+            console.log('✅ Email sent successfully via Web3Forms');
             return { 
                 status: 'success', 
-                method: 'deno-resend', 
+                method: 'web3forms', 
                 response: result 
             };
         } else {
-            throw new Error(result.error || 'Email sending failed');
+            throw new Error(result.message || 'Email sending failed');
         }
         
     } catch (error) {
-        console.error('❌ Deno function failed:', error);
+        console.error('❌ Web3Forms failed:', error);
         console.error('Error details:', error.message);
         
-        // Only use mailto as last resort
+        // Fallback to mailto
         console.log('🔄 Falling back to mailto...');
         return await sendEmailAlternative(emailData);
     }
