@@ -333,9 +333,9 @@ function initContactForm() {
             
             // Show appropriate success message based on method used
             if (result.method === 'mailto') {
-                showNotification('Email client opened with your message. Please send it to complete the process.', 'success');
+                showNotification('Email app opened! Your message is ready to send. Please tap send in your email app.', 'success');
             } else if (result.method === 'deno-resend') {
-                showNotification('Message sent successfully via Resend! I\'ll get back to you soon.', 'success');
+                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
             } else {
                 showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
             }
@@ -458,88 +458,100 @@ function clearFieldError(field) {
 
 // ===== EMAIL SENDING WITH DENO + RESEND ===== //
 async function sendEmail(emailData) {
-    console.log('🚀 Starting email send process with Deno + Resend...');
+    console.log('🚀 Starting email send process...');
     console.log('📧 Email data:', emailData);
     
-    // Your Deno function endpoint - update this URL when deployed
-    const DENO_FUNCTION_URL = 'http://localhost:8000/send-contact-email'; // Local development
-    // const DENO_FUNCTION_URL = 'https://your-deno-deploy-url.deno.dev/send-contact-email'; // Production
+    // Check if we're on localhost (development) or production
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const DENO_FUNCTION_URL = isLocalhost 
+        ? 'http://localhost:8000/send-contact-email' 
+        : null; // No Deno function in production yet
     
-    try {
-        console.log('📤 Sending email via Deno function...');
-        
-        const payload = {
-            name: emailData.name,
-            email: emailData.email,
-            message: `Subject: ${emailData.subject}\n\n${emailData.message}`
-        };
-        
-        console.log('📋 Sending payload to Deno function:', payload);
-        
-        const response = await fetch(DENO_FUNCTION_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-        });
-        
-        console.log('📡 Response status:', response.status);
-        
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('❌ Deno function error response:', errorText);
-            throw new Error(`Deno function error: ${response.status} - ${errorText}`);
-        }
-        
-        const result = await response.json();
-        console.log('📨 Deno function response:', result);
-        
-        if (result.success) {
-            console.log('✅ Email sent successfully via Deno + Resend');
-            return { 
-                status: 'success', 
-                method: 'deno-resend', 
-                response: result 
-            };
-        } else {
-            throw new Error(result.error || 'Email sending failed');
-        }
-        
-    } catch (error) {
-        console.error('❌ Deno function failed:', error);
-        
-        // Try alternative method as fallback
+    // If we have a Deno function URL and we're on localhost, try it
+    if (DENO_FUNCTION_URL && isLocalhost) {
         try {
-            console.log('🔄 Trying fallback service...');
-            return await sendEmailAlternative(emailData);
-        } catch (fallbackError) {
-            console.error('❌ All services failed:', fallbackError);
-            throw new Error('Unable to send email. Please contact me directly at omarabdullatiff000@gmail.com');
+            console.log('📤 Sending email via Deno function...');
+            
+            const payload = {
+                name: emailData.name,
+                email: emailData.email,
+                message: `Subject: ${emailData.subject}\n\n${emailData.message}`
+            };
+            
+            console.log('📋 Sending payload to Deno function:', payload);
+            
+            const response = await fetch(DENO_FUNCTION_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            console.log('📡 Response status:', response.status);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Deno function error response:', errorText);
+                throw new Error(`Deno function error: ${response.status} - ${errorText}`);
+            }
+            
+            const result = await response.json();
+            console.log('📨 Deno function response:', result);
+            
+            if (result.success) {
+                console.log('✅ Email sent successfully via Deno + Resend');
+                return { 
+                    status: 'success', 
+                    method: 'deno-resend', 
+                    response: result 
+                };
+            } else {
+                throw new Error(result.error || 'Email sending failed');
+            }
+            
+        } catch (error) {
+            console.error('❌ Deno function failed:', error);
+            // Fall through to alternative method
         }
     }
+    
+    // Use mailto fallback (works on all devices including mobile)
+    console.log('🔄 Using mailto fallback (works on all devices)...');
+    return await sendEmailAlternative(emailData);
 }
 
 // ===== ALTERNATIVE EMAIL SERVICE ===== //
 async function sendEmailAlternative(emailData) {
-    console.log('📧 Trying alternative email service...');
+    console.log('📧 Using mailto email service (works on all devices)...');
     
-    // Using a simple mailto as ultimate fallback
+    // Using mailto - works on all devices including mobile
     const subject = encodeURIComponent(`Portfolio Contact: ${emailData.subject}`);
     const body = encodeURIComponent(
         `Name: ${emailData.name}\n` +
         `Email: ${emailData.email}\n` +
         `Subject: ${emailData.subject}\n\n` +
-        `Message:\n${emailData.message}`
+        `Message:\n${emailData.message}\n\n` +
+        `---\nSent from portfolio contact form`
     );
     
     const mailtoLink = `mailto:omarabdullatiff000@gmail.com?subject=${subject}&body=${body}`;
     
-    // Open email client
-    const link = document.createElement('a');
-    link.href = mailtoLink;
-    link.target = '_blank';
-    link.click();
+    // Open email client (works on mobile and desktop)
+    // Use window.location for better mobile compatibility
+    try {
+        // Try direct window.location first (better for mobile)
+        window.location.href = mailtoLink;
+    } catch (e) {
+        // Fallback to anchor element (for desktop)
+        const link = document.createElement('a');
+        link.href = mailtoLink;
+        link.target = '_blank';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
     
     return new Promise((resolve) => {
         setTimeout(() => {
