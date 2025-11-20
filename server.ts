@@ -1,8 +1,21 @@
 // HTTP Server for testing the contact form
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
+import { load } from "https://deno.land/std@0.190.0/dotenv/mod.ts";
 
-const resend = new Resend("re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt");
+// Load environment variables from .env file
+await load({ export: true });
+
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+if (!RESEND_API_KEY) {
+  console.error("❌ RESEND_API_KEY environment variable is not set!");
+  console.error("💡 Options:");
+  console.error("   1. Add RESEND_API_KEY to your .env file");
+  console.error("   2. Or set it with: export RESEND_API_KEY=your-api-key");
+  Deno.exit(1);
+}
+
+const resend = new Resend(RESEND_API_KEY);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

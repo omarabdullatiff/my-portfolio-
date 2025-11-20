@@ -25,7 +25,7 @@ Your portfolio now uses a Deno serverless function with Resend API for secure, r
    - Create new project
    - Connect your GitHub repository
    - Set entry point: `functions/send-contact-email.ts`
-   - Add environment variable: `RESEND_API_KEY=re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt`
+   - Add environment variable: `RESEND_API_KEY=your-resend-api-key-here`
 
 3. **Update Frontend URL**
    - Copy your Deno Deploy URL (e.g., `https://your-project.deno.dev`)
@@ -40,7 +40,7 @@ Your portfolio now uses a Deno serverless function with Resend API for secure, r
 
 2. **Set Environment Variable**
    ```bash
-   export RESEND_API_KEY=re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt
+   export RESEND_API_KEY=your-resend-api-key-here
    ```
 
 3. **Run the Function**
@@ -67,7 +67,7 @@ Your portfolio now uses a Deno serverless function with Resend API for secure, r
 
 3. **Set Environment Variables**
    ```bash
-   supabase secrets set RESEND_API_KEY=re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt
+   supabase secrets set RESEND_API_KEY=your-resend-api-key-here
    ```
 
 ## 🔧 Configuration
@@ -84,7 +84,7 @@ const DENO_FUNCTION_URL = 'https://your-deployed-function-url';
 
 ### Environment Variables
 
-- `RESEND_API_KEY`: Your Resend API key (`re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt`)
+- `RESEND_API_KEY`: Your Resend API key (get from https://resend.com/api-keys)
 
 ## 🧪 Testing
 
@@ -92,7 +92,7 @@ const DENO_FUNCTION_URL = 'https://your-deployed-function-url';
 
 1. **Start Deno Function**
    ```bash
-   export RESEND_API_KEY=re_G9uFE2ET_Pbus6yJVXEaYTVnJt3fveAYt
+   export RESEND_API_KEY=your-resend-api-key-here
    deno run --allow-net --allow-env functions/send-contact-email.ts
    ```
 

@@ -94,3 +94,11 @@ temp/
 # Personal files (add your own)
 # personal-notes.md
 # draft-content/
+
+# API Keys and Secrets
+*.key
+*.pem
+secrets/
+.env
+.env.*
+!.env.example

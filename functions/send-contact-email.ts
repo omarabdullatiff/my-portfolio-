@@ -1,7 +1,22 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@4.0.0";
+import { load } from "https://deno.land/std@0.190.0/dotenv/mod.ts";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+// Load environment variables from .env file (for local development)
+// In production, environment variables are set by the deployment platform
+try {
+  await load({ export: true });
+} catch {
+  // .env file not found, using system environment variables (production)
+}
+
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+if (!RESEND_API_KEY) {
+  console.error("❌ RESEND_API_KEY environment variable is not set!");
+  throw new Error("RESEND_API_KEY is required");
+}
+
+const resend = new Resend(RESEND_API_KEY);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
