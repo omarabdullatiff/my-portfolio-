@@ -463,62 +463,81 @@ async function sendEmail(emailData) {
     
     // Check if we're on localhost (development) or production
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const DENO_FUNCTION_URL = isLocalhost 
-        ? 'http://localhost:8000/send-contact-email' 
-        : null; // No Deno function in production yet
     
-    // If we have a Deno function URL and we're on localhost, try it
-    if (DENO_FUNCTION_URL && isLocalhost) {
-        try {
-            console.log('📤 Sending email via Deno function...');
-            
-            const payload = {
-                name: emailData.name,
-                email: emailData.email,
-                message: `Subject: ${emailData.subject}\n\n${emailData.message}`
-            };
-            
-            console.log('📋 Sending payload to Deno function:', payload);
-            
-            const response = await fetch(DENO_FUNCTION_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload)
-            });
-            
-            console.log('📡 Response status:', response.status);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('❌ Deno function error response:', errorText);
-                throw new Error(`Deno function error: ${response.status} - ${errorText}`);
-            }
-            
-            const result = await response.json();
-            console.log('📨 Deno function response:', result);
-            
-            if (result.success) {
-                console.log('✅ Email sent successfully via Deno + Resend');
-                return { 
-                    status: 'success', 
-                    method: 'deno-resend', 
-                    response: result 
-                };
-            } else {
-                throw new Error(result.error || 'Email sending failed');
-            }
-            
-        } catch (error) {
-            console.error('❌ Deno function failed:', error);
-            // Fall through to alternative method
-        }
+    // Deno Deploy function URL - UPDATE THIS with your deployed function URL
+    // 
+    // TO DEPLOY:
+    // 1. Go to https://deno.com/deploy
+    // 2. Sign up and create new project
+    // 3. Deploy functions/send-contact-email.ts
+    // 4. Set RESEND_API_KEY environment variable
+    // 5. Copy your function URL and replace the URL below
+    //
+    // Example: If your Deno Deploy URL is https://portfolio-email-abc123.deno.dev
+    // Then use: 'https://portfolio-email-abc123.deno.dev/send-contact-email'
+    //
+    const DENO_FUNCTION_URL = isLocalhost 
+        ? 'http://localhost:8000/send-contact-email' // Local development
+        : null; // Production - Set this after deploying to Deno Deploy!
+    
+    // If no production URL is set, show helpful error
+    if (!DENO_FUNCTION_URL && !isLocalhost) {
+        console.error('❌ Deno function URL not configured for production!');
+        console.error('📖 See DEPLOY_DENO_FUNCTION.md for deployment instructions');
+        throw new Error('Email service not configured. Please deploy the Deno function or contact the site owner.');
     }
     
-    // Use mailto fallback (works on all devices including mobile)
-    console.log('🔄 Using mailto fallback (works on all devices)...');
-    return await sendEmailAlternative(emailData);
+    // Try to send via Deno function (works on all devices)
+    try {
+        console.log('📤 Sending email via Deno + Resend function...');
+        
+        const payload = {
+            name: emailData.name,
+            email: emailData.email,
+            message: `Subject: ${emailData.subject}\n\n${emailData.message}`
+        };
+        
+        console.log('📋 Sending payload to Deno function:', payload);
+        console.log('🌐 Function URL:', DENO_FUNCTION_URL);
+        
+        const response = await fetch(DENO_FUNCTION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        console.log('📡 Response status:', response.status);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Deno function error response:', errorText);
+            throw new Error(`Email service error: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('📨 Deno function response:', result);
+        
+        if (result.success) {
+            console.log('✅ Email sent successfully via Deno + Resend');
+            return { 
+                status: 'success', 
+                method: 'deno-resend', 
+                response: result 
+            };
+        } else {
+            throw new Error(result.error || 'Email sending failed');
+        }
+        
+    } catch (error) {
+        console.error('❌ Deno function failed:', error);
+        console.error('Error details:', error.message);
+        
+        // Only use mailto as last resort
+        console.log('🔄 Falling back to mailto...');
+        return await sendEmailAlternative(emailData);
+    }
 }
 
 // ===== ALTERNATIVE EMAIL SERVICE ===== //
