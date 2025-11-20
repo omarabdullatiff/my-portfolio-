@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar - Data Engineer Portfolio</title>
+    <meta name="description" content="Data Engineer specializing in ETL pipelines, real-time streaming, and cloud data architectures">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-text">Omar Abdullatif</span>
+                <span class="logo-subtitle">Data Engineer</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-element" style="--delay: 0s; --duration: 6s;">
+                <i class="fas fa-database"></i>
+            </div>
+            <div class="floating-element" style="--delay: 2s; --duration: 8s;">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="floating-element" style="--delay: 4s; --duration: 7s;">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="floating-element" style="--delay: 1s; --duration: 9s;">
+                <i class="fas fa-cloud"></i>
+            </div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Omar Abdullatif</span>
+                        <span class="title-line highlight">Data Engineer</span>
+                    </h1>
+                    <p class="hero-description">
+                        Passionate data engineer and computer science enthusiast on a mission to unlock 
+                        the power of data and technology. Specializing in ETL pipelines, data warehousing, 
+                        and building scalable data solutions that drive business insights.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            View My Work
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                        <a href="assets/resume.pdf" class="btn btn-outline" download>
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Transforming raw data into actionable insights</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <h3>My Journey</h3>
+                        <p>
+                            As a passionate data engineer and computer science enthusiast, I'm on a mission to unlock 
+                            the power of data and technology. Currently focusing on DB internals, data warehousing, 
+                            and mastering ETL pipeline development with tools like Apache Airflow and dbt.
+                        </p>
+                        <p>
+                            I have hands-on experience with PostgreSQL, SQL Server, and the Kimball methodology for 
+                            data warehousing. Currently expanding my knowledge through "The Fundamentals of Data Engineering" 
+                            and "The Data Warehouse Toolkit" while building real-world projects that demonstrate 
+                            clean, analytics-ready data solutions.
+                        </p>
+                    </div>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <h4>Clean Code</h4>
+                                <p>Writing maintainable, well-documented code</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-cloud"></i>
+                            <div>
+                                <h4>Cloud Native</h4>
+                                <p>Leveraging AWS, GCP for scalable solutions</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Performance</h4>
+                                <p>Optimizing for speed and efficiency</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="tech-orbit">
+                        <div class="orbit-center">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 0deg">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 60deg">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 120deg">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 180deg">
+                            <i class="fas fa-stream"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 240deg">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="orbit-item" style="--angle: 300deg">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Real-world data engineering solutions</p>
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Scroll horizontally to explore all projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1: SQL Data Warehouse -->
+                <div class="project-card" data-category="etl">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="projects/sql-data-warehouse.html" class="project-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="https://github.com/omarabdullatiff/SQL-Data-Warehouse-Project" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <img src="images/sqletldwh.png" alt="SQL Data Warehouse Project" class="project-cover-image">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Data Warehouse</div>
+                        <h3 class="project-title">SQL Data Warehouse with Apache Airflow</h3>
+                        <p class="project-description">
+                            Comprehensive data warehouse solution implementing Medallion Architecture with multi-source integration (ERP & CRM). 
+                            Features automated ETL pipelines, data quality controls, and analytics-ready gold layer views for business intelligence.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">SQL Server</span>
+                            <span class="tech-tag">Apache Airflow</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">Multi-Source</span>
+                                <span class="metric-label">Integration</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">Automated</span>
+                                <span class="metric-label">ETL Pipeline</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder for future projects -->
+                <div class="coming-soon-projects">
+                    <div class="coming-soon-card">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>More Projects Coming Soon</h3>
+                        <p>I'm constantly working on new data engineering projects. Check back soon for updates!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Services & Expertise</h2>
+                <p class="section-subtitle">Professional services I offer for your data needs</p>
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Scroll to explore all services</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spider"></i>
+                    </div>
+                    <h3>Web Scraping</h3>
+                    <p>Extract valuable data from websites with custom scraping solutions. I build robust, scalable scrapers that handle dynamic content, anti-bot measures, and large-scale data collection.</p>
+                    <ul class="service-features">
+                        <li>Custom Python scrapers with Scrapy/BeautifulSoup</li>
+                        <li>JavaScript-heavy sites with Selenium/Playwright</li>
+                        <li>API integration and data extraction</li>
+                        <li>Automated scheduling and monitoring</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3>Data Cleaning & Processing</h3>
+                    <p>Transform messy, inconsistent data into clean, analysis-ready datasets. I handle data quality issues, standardization, and preparation for analytics or machine learning.</p>
+                    <ul class="service-features">
+                        <li>Data quality assessment and profiling</li>
+                        <li>Duplicate detection and removal</li>
+                        <li>Data standardization and normalization</li>
+                        <li>Missing data imputation strategies</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>ETL Pipeline Development</h3>
+                    <p>Design and build automated data pipelines that extract, transform, and load data from multiple sources into your data warehouse or analytics platform.</p>
+                    <ul class="service-features">
+                        <li>Apache Airflow pipeline orchestration</li>
+                        <li>Real-time streaming with Kafka</li>
+                        <li>Cloud-native solutions (AWS/GCP/Azure)</li>
+                        <li>Data validation and monitoring</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Data Warehouse Design</h3>
+                    <p>Build scalable data warehouses using modern architectures like Medallion (Bronze/Silver/Gold) with proper dimensional modeling and optimization.</p>
+                    <ul class="service-features">
+                        <li>Dimensional modeling (Kimball methodology)</li>
+                        <li>Modern data stack implementation</li>
+                        <li>Performance optimization</li>
+                        <li>Data governance and documentation</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data Analytics & BI</h3>
+                    <p>Create insightful dashboards and reports that help you make data-driven decisions. From exploratory analysis to automated reporting systems.</p>
+                    <ul class="service-features">
+                        <li>Interactive dashboards (Tableau, Power BI)</li>
+                        <li>Statistical analysis and insights</li>
+                        <li>Automated reporting systems</li>
+                        <li>KPI tracking and monitoring</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Data Solutions</h3>
+                    <p>Migrate and optimize your data infrastructure on cloud platforms. Build serverless, cost-effective solutions that scale with your business needs.</p>
+                    <ul class="service-features">
+                        <li>AWS/GCP/Azure data services</li>
+                        <li>Serverless data processing</li>
+                        <li>Cost optimization strategies</li>
+                        <li>Infrastructure as Code (Terraform)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="work-availability">
+                <div class="availability-card">
+                    <div class="availability-header">
+                        <h3>Ready to Work With You</h3>
+                        <div class="availability-status">
+                            <div class="status-indicator active"></div>
+                            <span>Available Now</span>
+                        </div>
+                    </div>
+                    <div class="work-options">
+                        <div class="work-option">
+                            <i class="fas fa-home"></i>
+                            <div>
+                                <h4>Remote Work</h4>
+                                <p>Available for full-time remote positions worldwide</p>
+                            </div>
+                        </div>
+                        <div class="work-option">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h4>Freelance Projects</h4>
+                                <p>Short-term and long-term project-based work</p>
+                            </div>
+                        </div>
+                        <div class="work-option">
+                            <i class="fas fa-file-contract"></i>
+                            <div>
+                                <h4>Contract Work</h4>
+                                <p>3-12 month contracts for specific initiatives</p>
+                            </div>
+                        </div>
+                        <div class="work-option">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Consulting</h4>
+                                <p>Data strategy and architecture consulting</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="availability-cta">
+                        <p>Let's discuss your data challenges and how I can help solve them.</p>
+                        <div class="cta-buttons">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-comments"></i>
+                                Start a Conversation
+                            </a>
+                            <a href="mailto:omarabdullatiff000@gmail.com" class="btn btn-secondary">
+                                <i class="fas fa-envelope"></i>
+                                Email Directly
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Technologies I work with</p>
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Scroll horizontally to explore all skills</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programming Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Scala</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Bash</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Big Data & Streaming</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Apache Spark</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Apache Kafka</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Apache Airflow</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Hadoop</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Platforms</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">AWS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Google Cloud</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Azure</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Terraform</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Databases & Storage</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">PostgreSQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Redis</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Elasticsearch</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="section-subtitle">Ready to build something amazing?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form-container">
+                    <div class="contact-form-header">
+                        <h3>Send me a message</h3>
+                        <p>I'd love to hear from you. Send me a message and I'll respond as soon as possible.</p>
+                    </div>
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-message" id="email-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                            <span class="error-message" id="subject-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <span class="error-message" id="message-error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>omarabdullatiff000@gmail.com</p>
+                        <a href="mailto:omarabdullatiff000@gmail.com" class="contact-link">Direct Email</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p>Connect with me professionally</p>
+                        <a href="https://www.linkedin.com/in/omar-abdullatif-799b53256" class="contact-link">Connect</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>Check out my code repositories</p>
+                        <a href="https://github.com/omarabdullatiff" class="contact-link">View Code</a>
+                    </div>
+                    <div class="contact-cta">
+                        <h3>Ready to discuss your next data project?</h3>
+                        <p>I'm always interested in new opportunities and challenging data problems.</p>
+                        <div class="cta-buttons">
+                            <a href="assets/resume.pdf" class="btn btn-primary" download>
+                                <i class="fas fa-download"></i>
+                                Download CV
+                            </a>
+                            <a href="mailto:omarabdullatiff000@gmail.com" class="btn btn-secondary">
+                                <i class="fas fa-envelope"></i>
+                                Direct Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 Omar Abdullatif. Built with passion for data engineering.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/omarabdullatiff" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/omar-abdullatif-799b53256" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:omarabdullatiff000@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
